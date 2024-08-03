@@ -17,13 +17,8 @@ import warnings
 warnings.filterwarnings("ignore")
 import os
 import re
-import json
-import operator
-import asyncio
-from typing import TypedDict, Annotated, List, Union
-from uuid import uuid4
-import boto3
-
+from typing import List, Dict, Any, TypedDict
+from typing_extensions import TypedDict
 import openai
 from langchain_core.messages import AnyMessage, SystemMessage, HumanMessage, ToolMessage, AIMessage
 from langchain_core.pydantic_v1 import BaseModel
@@ -31,14 +26,11 @@ from langchain_openai import ChatOpenAI
 from langgraph.graph import END, StateGraph, MessagesState
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.checkpoint.aiosqlite import AsyncSqliteSaver
-from langchain_core.runnables import RunnableLambda, RunnableWithFallbacks
-from langgraph.prebuilt import ToolNode
 
 from api.athena_operations import execute_athena_query_function
 from databases.mongo_db import MongoVectorDatabase
 from databases.knowledge_graph import KnowledgeGraph
 
-from typing import List, Dict, Any, TypedDict
 
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
@@ -46,9 +38,6 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Assuming get_table_names and get_database_schemas functions are defined in get_table_schema.py
 from get_table_schema import get_table_names, get_database_schemas
-
-from typing import List, Dict
-from typing_extensions import TypedDict
 
 class AgentState(TypedDict):
     query: str
