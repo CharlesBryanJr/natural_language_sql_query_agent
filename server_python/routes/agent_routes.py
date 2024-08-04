@@ -4,10 +4,6 @@ from flask import Blueprint, request, jsonify
 from flask_cors import CORS
 from server_python.controllers.agent_controller import ask_question
 
-# Print the current working directory and system path
-print("Current working directory (agent_routes):", os.getcwd())
-print("System path (agent_routes):", sys.path)
-
 # Initialize the blueprint
 agent_bp = Blueprint('agent_bp', __name__)
 CORS(agent_bp)  # Enable CORS for this blueprint

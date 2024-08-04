@@ -425,7 +425,8 @@ class AgentWorkflow:
             print(f'pattern.match(presigned_url)')
             return END
         else:
-            state['revision_number'] = int(state.get('revision_number', 0)) + 1
+            current_revision_number = int(state.get('revision_number', 0))
+            state['revision_number'] = current_revision_number + 1
             print(f"revision_number - {state['revision_number']}")
             if state["revision_number"] > state["max_revisions"]:
                 return END  # Or handle as a different failure state if desired

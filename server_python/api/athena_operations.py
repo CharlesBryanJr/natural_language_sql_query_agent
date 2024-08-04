@@ -16,6 +16,18 @@
 import time
 import traceback
 import boto3
+from dotenv import load_dotenv, find_dotenv
+import os
+
+# Automatically find and load the .env file
+load_dotenv(find_dotenv())
+
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+
+# Ensure credentials are loaded correctly
+print(f"AWS_ACCESS_KEY_ID: {AWS_ACCESS_KEY_ID}")
+print(f"AWS_SECRET_ACCESS_KEY: {AWS_SECRET_ACCESS_KEY}")
 
 athena = boto3.client('athena', region_name='us-west-2')
 s3 = boto3.client('s3', region_name='us-west-2')

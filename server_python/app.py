@@ -4,10 +4,6 @@ from flask import Flask, request, jsonify
 from dotenv import load_dotenv, find_dotenv
 from flask_cors import CORS
 
-# Print the current working directory and system path
-print("Current working directory:", os.getcwd())
-print("System path:", sys.path)
-
 # Ensure the project root is in the path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(project_root)
