@@ -1,8 +1,22 @@
 import os
+import sys
 from flask import Flask, request, jsonify
-from routes.agent_routes import agent_bp
 from dotenv import load_dotenv, find_dotenv
 from flask_cors import CORS
+
+# Print the current working directory and system path
+print("Current working directory:", os.getcwd())
+print("System path:", sys.path)
+
+# Ensure the project root is in the path
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(project_root)
+
+try:
+    from server_python.routes.agent_routes import agent_bp
+    print("Successfully imported agent_bp from routes.agent_routes")
+except ImportError as e:
+    print("Failed to import agent_bp from routes.agent_routes:", str(e))
 
 # Load environment variables
 load_dotenv(find_dotenv())
@@ -12,7 +26,10 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Register blueprints
-app.register_blueprint(agent_bp, url_prefix='/api')
+if 'agent_bp' in globals():
+    app.register_blueprint(agent_bp, url_prefix='/api')
+else:
+    print("agent_bp is not defined")
 
 # Add a root route for health checks
 @app.route('/')

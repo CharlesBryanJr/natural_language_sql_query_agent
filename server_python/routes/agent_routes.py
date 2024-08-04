@@ -2,11 +2,11 @@ import sys
 import os
 from flask import Blueprint, request, jsonify
 from flask_cors import CORS
-from controllers.agent_controller import ask_question
+from server_python.controllers.agent_controller import ask_question
 
-# Ensure the project root is in the path
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-sys.path.append(project_root)
+# Print the current working directory and system path
+print("Current working directory (agent_routes):", os.getcwd())
+print("System path (agent_routes):", sys.path)
 
 # Initialize the blueprint
 agent_bp = Blueprint('agent_bp', __name__)
