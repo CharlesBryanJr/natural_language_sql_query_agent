@@ -54,7 +54,6 @@ def ask_question():
         writer_result = data.get('writer_result')
         presigned_url = data.get('presigned_url')
 
-
         args = (query, database, review_define_objective, review_before_generate, review_after_generate, review_after_reflect, research_critique, Detailed, lastNode, nextNode, thread, draftRev, count, writer_result, presigned_url)
 
         # writer_result = writer(query)
@@ -82,6 +81,7 @@ def ask_question():
             "writer_result": writer_result,
             "presigned_url": presigned_url
         }
+
         print('-'*30)
         return jsonify(result)
 
