@@ -19,7 +19,7 @@ load_dotenv(find_dotenv())
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Register blueprints
 if 'agent_bp' in globals():
