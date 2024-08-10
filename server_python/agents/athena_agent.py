@@ -432,6 +432,32 @@ class AgentWorkflow:
                 return END  # Or handle as a different failure state if desired
             else:
                 return "reflection_node"
+    
+    def describe_query_node(self, state):
+        print('-'*30)
+        print(f'describe_query_node')
+        DESCRIBE_QUERY_PROMPT = """
+        Important: Only perform the tasks explicitly stated in the instructions below. Do not generate any additional content or perform any other actions beyond what is explicitly requested.
+        Your task is to describe the purpose and action of the given SQL query based on its structure and content.
+        Describe what the query does.
+        """
+
+        messages = [
+            SystemMessage(content=DESCRIBE_QUERY_PROMPT),
+            HumanMessage(content=state['query'])
+        ]
+        response = self.model.invoke(
+            messages,
+            temperature=0.2,     # Very low temperature for focused output
+            max_tokens=250,       # Limit output length for a concise description
+            top_p=0.8,           # Slightly higher top_p for some flexibility in phrasing
+            frequency_penalty=0.1, # Slight penalty to avoid repetitive language
+            presence_penalty=0.1,  # Slight penalty to encourage conciseness
+        )
+        state['query_description'] = response.content
+        print(f"state['query_description'] - {state['query_description']}")
+        print('-'*30)
+        return state
 
     def reflection_node(self, state):
         print('-'*30)
