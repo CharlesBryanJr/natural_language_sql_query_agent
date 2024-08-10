@@ -2,7 +2,7 @@ import sys
 import os
 from flask import Blueprint, request, jsonify
 from flask_cors import CORS
-from server_python.controllers.agent_controller import ask_question
+from controllers.agent_controller import ask_question
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(project_root)

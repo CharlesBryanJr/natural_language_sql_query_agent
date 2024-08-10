@@ -3,16 +3,11 @@ import sys
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv, find_dotenv
 from flask_cors import CORS
+from routes.agent_routes import agent_bp
 
 # Ensure the project root is in the path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(project_root)
-
-try:
-    from server_python.routes.agent_routes import agent_bp
-    print("Successfully imported agent_bp from routes.agent_routes")
-except ImportError as e:
-    print("Failed to import agent_bp from routes.agent_routes:", str(e))
 
 # Load environment variables
 load_dotenv(find_dotenv())
