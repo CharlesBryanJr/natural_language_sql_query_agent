@@ -63,4 +63,4 @@ try:
 
 except Exception as e:
     print(f"An error occurred during app initialization: {str(e)}")
-    sys.exit(1)                                                                                                                                                                                                                                                                                                                                                                                                              vvvvvvvbbbbbbbbvbbbvbvbvvvvvvv                                                                                                                        
+    sys.exit(1) 
