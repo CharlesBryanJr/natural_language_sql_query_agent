@@ -16,7 +16,6 @@ try:
             break
 
     if routes_dir:
-        print(f"Found 'routes' directory: {routes_dir}")
         sys.path.append(os.path.dirname(routes_dir))
     else:
         print("'routes' directory not found")
@@ -39,7 +38,11 @@ try:
     @app.route('/')
     def home():
         try:
-            return "App is running on Vercel!"
+            openai_api_key = os.getenv('OPENAI_API_KEY')
+            if openai_api_key:
+                return f"App is running on Vercel! OpenAI API Key"
+            else:
+                raise ValueError("OPENAI_API_KEY not set")
         except Exception as e:
             app.logger.error(f"Error in home route: {str(e)}")
             return jsonify({"error": "An internal error occurred"}), 500
@@ -63,4 +66,4 @@ try:
 
 except Exception as e:
     print(f"An error occurred during app initialization: {str(e)}")
-    sys.exit(1) 
+    sys.exit(1)
