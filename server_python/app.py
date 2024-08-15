@@ -40,22 +40,25 @@ try:
         try:
             openai_api_key = os.getenv('OPENAI_API_KEY')
             if openai_api_key:
-                return f"App is running on Vercel! OpenAI API Key"
+                return f"App is running on Vercel! OpenAI API Key: {openai_api_key}"
             else:
-                raise ValueError("OPENAI_API_KEY not set")
+                raise ValueError("OPENAI_API_KEY is not set")
         except Exception as e:
-            app.logger.error(f"Error in home route: {str(e)}")
+            app.logger.error(f"Error in home route: {str(e)} - Environment variables: {os.environ}")
             return jsonify({"error": "An internal error occurred"}), 500
+
 
     # Add a route to help diagnose the 403 error
     @app.route('/debug', methods=['GET', 'POST'])
     def debug():
         try:
             headers = dict(request.headers)
-            return jsonify({"headers": headers, "message": "Debugging info"}), 200
+            env_vars = {key: os.getenv(key) for key in os.environ.keys()}
+            return jsonify({"headers": headers, "env_vars": env_vars, "message": "Debugging info"}), 200
         except Exception as e:
             app.logger.error(f"Error in debug route: {str(e)}")
             return jsonify({"error": "An error occurred while debugging"}), 500
+
 
     # This is important for Vercel
     wsgi_app = app.wsgi_app
