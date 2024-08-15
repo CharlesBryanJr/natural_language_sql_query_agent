@@ -39,7 +39,7 @@ try:
     @app.route('/')
     def home():
         try:
-            return "Flask app is running on EC2!"
+            return "App is running on Vercel!"
         except Exception as e:
             app.logger.error(f"Error in home route: {str(e)}")
             return jsonify({"error": "An internal error occurred"}), 500
