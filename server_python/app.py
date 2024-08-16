@@ -39,10 +39,8 @@ try:
     @app.route('/')
     def home():
         try:
-            print(os.environ.get('OPENAI_API_KEY'))
-            print(os.environ.get('openai_api_key'))
-            openai_api_key = os.getenv('OPENAI_API_KEY')
-            OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+            openai_api_key = os.getenv('openai_api_key')
+            OPENAI_API_KEY = os.getenv('openai_api_key')
             if openai_api_key:
                 return f"App is running on Vercel! OpenAI API Key: {openai_api_key}"
             else:
