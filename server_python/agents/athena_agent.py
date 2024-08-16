@@ -684,7 +684,7 @@ def writer(*args, use_async=False, **kwargs):
     else:
         memory = SqliteSaver.from_conn_string(":memory:")
 
-    model = ChatOpenAI(model="gpt-3.5-turbo", 
+    model = ChatOpenAI(model="gpt-3.5-turbo",
                        temperature=0,
                        openai_api_key=OPENAI_API_KEY
                        )
