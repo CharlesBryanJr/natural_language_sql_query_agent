@@ -3,6 +3,7 @@ import sys
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv, find_dotenv
 from flask_cors import CORS
+load_dotenv(find_dotenv())
 
 try:
     # Find the 'routes' directory
@@ -38,7 +39,10 @@ try:
     @app.route('/')
     def home():
         try:
+            print(os.environ.get('OPENAI_API_KEY'))
+            print(os.environ.get('openai_api_key'))
             openai_api_key = os.getenv('OPENAI_API_KEY')
+            OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
             if openai_api_key:
                 return f"App is running on Vercel! OpenAI API Key: {openai_api_key}"
             else:
