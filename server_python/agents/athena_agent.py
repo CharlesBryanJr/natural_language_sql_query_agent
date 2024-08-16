@@ -33,8 +33,8 @@ from databases.knowledge_graph import KnowledgeGraph
 
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
-openai.api_key = os.getenv("OPENAI_API_KEY")
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+openai.api_key = os.getenv("openai_api_key")
+OPENAI_API_KEY = os.getenv('openai_api_key')
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 
